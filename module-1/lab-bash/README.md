@@ -21,7 +21,7 @@ exercices  inputs  lorem  lorem-copy  modules  outputs  README.md
 
 * Imprime en consola "Hello World".
 
-echo 'Hello World'
+echo 'Hello World' 
 
 * Crea un directorio nuevo llamado `new_dir`.
 
