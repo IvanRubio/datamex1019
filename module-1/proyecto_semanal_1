@@ -1,0 +1,81 @@
+def gato():
+    fin=False
+    casillas = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    combinacionesChidas = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6))
+
+    def p1():
+        n = tirada()
+        if casillas[n] == "X" or casillas[n] == "O":
+            print("Posición ya ocupada. Selecciona otra")
+            p1()
+        else:
+            casillas[n] = "X"
+
+    def p2():
+        n = tirada()
+        if casillas[n] == "X" or casillas[n] == "O":
+            print("Posición ya ocupada. Selecciona otra")
+            p2()
+        else:
+            casillas[n] = "O"
+
+    def tirada():
+        while True:
+            while True:
+                a = input()
+                try:
+                    a=int(a)
+                    a-=1
+                    if a in range(0, 9):
+                        return a
+                    else:
+                        print("Valor inválido")
+                        continue
+                except ValueError:
+                   print("Valor inválido")
+                   continue
+
+    def chequeo():
+        count = 0
+        for a in combinacionesChidas:
+            if casillas[a[0]] == casillas[a[1]] == casillas[a[2]] == "X":
+                print("Ganó el jugador # 1!")
+                return True
+
+            if casillas[a[0]] == casillas[a[1]] == casillas[a[2]] == "O":
+                print("Ganó el jugador # 2!")
+                return True
+        for a in range(9):
+            if casillas[a] == "X" or casillas[a] == "O":
+                count += 1
+            if count == 9:
+                print("Empate")
+                return True
+
+    def empate():
+        print(casillas[0], casillas[1], casillas[2])
+        print(casillas[3], casillas[4], casillas[5])
+        print(casillas[6], casillas[7], casillas[8])
+        print()
+
+    while not fin:
+        empate()
+        fin = chequeo()
+        if fin == True:
+            break
+        print("Es el turno del jugador # 1")
+        p1()
+        print()
+        empate()
+        fin = chequeo()
+        if fin == True:
+            break
+        print("Es el turno del jugador # 2")
+        p2()
+        print()
+
+    if input("Jugar otra vez? (s/n)\n") == "s":
+        print()
+        gato()
+
+gato()
